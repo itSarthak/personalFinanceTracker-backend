@@ -14,11 +14,9 @@ import java.util.Optional;
 @RequestMapping("/api/v1")
 public class ExpenseController {
     private final ExpenseService expenseService;
-    private final ExpenseRepository expenseRepository;
 
     public ExpenseController(ExpenseService expenseService, ExpenseRepository expenseRepository) {
         this.expenseService = expenseService;
-        this.expenseRepository = expenseRepository;
     }
 
     @PostMapping("/expense")
