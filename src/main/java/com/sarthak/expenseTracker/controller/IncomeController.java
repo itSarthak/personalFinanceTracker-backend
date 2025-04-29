@@ -46,9 +46,9 @@ public class IncomeController {
     public ResponseEntity<String> deleteIncome(@PathVariable Long id) {
         boolean deletionStatus = incomeService.deleteIncome(id);
         if (deletionStatus) {
-            return ResponseEntity.ok("Product with ID" + id + "has been deleted");
+            return ResponseEntity.ok("Income with ID" + id + "has been deleted");
         } else {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to delete product with ID" + id);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to delete Income with ID" + id);
         }
     }
 

@@ -20,7 +20,7 @@ public class ExpenseService {
         try {
             return expenseRepository.save(expense);
         } catch (Exception e) {
-            throw new RuntimeException("Failed to save product: "+ e.getMessage());
+            throw new RuntimeException("Failed to save Expense: "+ e.getMessage());
         }
     }
 
@@ -28,7 +28,7 @@ public class ExpenseService {
         try {
             return expenseRepository.findAll();
         } catch (Exception e) {
-            throw new RuntimeException("Failed to fetch all Products: " + e.getMessage());
+            throw new RuntimeException("Failed to fetch all Expenses: " + e.getMessage());
         }
     }
 
@@ -36,7 +36,7 @@ public class ExpenseService {
         try {
             return expenseRepository.findById(id);
         } catch (RuntimeException e) {
-            throw new RuntimeException("Failed tyo fetch product by ID: "+ e.getMessage());
+            throw new RuntimeException("Failed to fetch Expense by ID: "+ e.getMessage());
         }
     }
 
@@ -54,7 +54,7 @@ public class ExpenseService {
                 return Optional.empty();
             }
         } catch (RuntimeException e) {
-            throw new RuntimeException("Failed to update product: " + e.getMessage());
+            throw new RuntimeException("Failed to update Expense: " + e.getMessage());
         }
     }
 

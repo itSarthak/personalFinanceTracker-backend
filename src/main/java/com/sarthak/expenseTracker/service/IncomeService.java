@@ -19,7 +19,7 @@ public class IncomeService {
         try {
             return incomeRepository.save(income);
         } catch (Exception e) {
-            throw new RuntimeException("Failed to save product: "+ e.getMessage());
+            throw new RuntimeException("Failed to save Income: "+ e.getMessage());
         }
     }
 
@@ -27,7 +27,7 @@ public class IncomeService {
         try {
             return incomeRepository.findAll();
         } catch (Exception e) {
-            throw new RuntimeException("Failed to fetch all Products: " + e.getMessage());
+            throw new RuntimeException("Failed to fetch all Incomes: " + e.getMessage());
         }
     }
 
@@ -35,7 +35,7 @@ public class IncomeService {
         try {
             return incomeRepository.findById(id);
         } catch (Exception e) {
-            throw new RuntimeException("Failed tyo fetch product by ID: "+ e.getMessage());
+            throw new RuntimeException("Failed to fetch income by ID: "+ e.getMessage());
         }
     }
 
@@ -53,7 +53,7 @@ public class IncomeService {
                 return Optional.empty();
             }
         } catch (Exception e) {
-            throw new RuntimeException("Failed to update product: "+ e.getMessage());
+            throw new RuntimeException("Failed to update income: "+ e.getMessage());
         }
     }
 
@@ -62,7 +62,7 @@ public class IncomeService {
             incomeRepository.deleteById(id);
             return true;
         } catch (Exception e) {
-            throw new RuntimeException("Failed to delete product: "+ e.getMessage());
+            throw new RuntimeException("Failed to delete income: "+ e.getMessage());
         }
     }
 }

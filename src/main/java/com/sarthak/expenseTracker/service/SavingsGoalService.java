@@ -22,11 +22,11 @@ public class SavingsGoalService {
         }
     }
 
-    public List<SavingsGoal> fetchAllsavingsGoal() {
+    public List<SavingsGoal> fetchAllSavingsGoal() {
         try {
             return savingsGoalRepository.findAll();
         } catch (Exception e) {
-            throw new RuntimeException("Failed to fetch all Products: " + e.getMessage());
+            throw new RuntimeException("Failed to fetch all saving goals: " + e.getMessage());
         }
     }
 
@@ -34,7 +34,7 @@ public class SavingsGoalService {
         try {
             return savingsGoalRepository.findById(id);
         } catch (Exception e) {
-            throw new RuntimeException("Failed tyo fetch product by ID: "+ e.getMessage());
+            throw new RuntimeException("Failed to fetch saving goal by ID: "+ e.getMessage());
         }
     }
 
@@ -51,7 +51,7 @@ public class SavingsGoalService {
                 return Optional.empty();
             }
         } catch (Exception e) {
-            throw new RuntimeException("Failed to update product: "+ e.getMessage());
+            throw new RuntimeException("Failed to update saving goal: "+ e.getMessage());
         }
     }
 
@@ -60,7 +60,7 @@ public class SavingsGoalService {
             savingsGoalRepository.deleteById(id);
             return true;
         } catch (Exception e) {
-            throw new RuntimeException("Failed to delete product: "+ e.getMessage());
+            throw new RuntimeException("Failed to delete saving goal: "+ e.getMessage());
         }
     }
 }

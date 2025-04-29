@@ -27,7 +27,7 @@ public class SavingsGoalController {
 
     @GetMapping("/savings")
     public ResponseEntity<List<SavingsGoal>> getAllSavingsGoal() {
-        List<SavingsGoal> savingsGoals = savingsGoalService.fetchAllsavingsGoal();
+        List<SavingsGoal> savingsGoals = savingsGoalService.fetchAllSavingsGoal();
         return ResponseEntity.ok(savingsGoals);
     }
 

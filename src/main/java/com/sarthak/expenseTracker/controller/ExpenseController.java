@@ -49,9 +49,9 @@ public class ExpenseController {
     public ResponseEntity<String> deleteExpense(@PathVariable Long id) {
         boolean deletionStatus = expenseService.deleteExpense(id);
         if(deletionStatus) {
-            return ResponseEntity.ok("Product with ID" + id + "has been deleted");
+            return ResponseEntity.ok("Expense with ID" + id + "has been deleted");
         } else {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to delete product with ID" + id);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to delete expense with ID" + id);
         }
     }
 }
