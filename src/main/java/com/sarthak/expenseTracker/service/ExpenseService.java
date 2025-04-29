@@ -1,14 +1,21 @@
 package com.sarthak.expenseTracker.service;
 
 import com.sarthak.expenseTracker.entity.Expense;
+import com.sarthak.expenseTracker.entity.Expense;
 import com.sarthak.expenseTracker.repository.ExpenseRepository;
-import com.sarthak.expenseTracker.repository.IncomeRepository;
+import com.sarthak.expenseTracker.repository.ExpenseRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.Month;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 
 @Service
+@Slf4j
 public class ExpenseService {
     private final ExpenseRepository expenseRepository;
 
@@ -63,6 +70,22 @@ public class ExpenseService {
             expenseRepository.deleteById(id);
             return true;
         } catch (RuntimeException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public List<Expense> fetchExpenseByMonth(int year, String month) {
+        try {
+            int monthNum = Month.valueOf(month.toUpperCase(Locale.ENGLISH)).getValue();
+            DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+            String startDate = String.format(year+"-"+monthNum+"-1");
+            String endDate = String.format(year+"-"+(monthNum+1)+"-1");
+            log.info("Dates have been converted from string to Date datatype");
+            List<Expense> incomeRecords = expenseRepository.getIncomeRecords_between(startDate, endDate);
+            log.info("Got the required response");
+            return incomeRecords;
+        } catch (Exception e) {
+            log.error("There is a error "+ e);
             throw new RuntimeException(e);
         }
     }

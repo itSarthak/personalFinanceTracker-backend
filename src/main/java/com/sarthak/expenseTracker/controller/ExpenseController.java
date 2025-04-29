@@ -1,8 +1,10 @@
 package com.sarthak.expenseTracker.controller;
 
 import com.sarthak.expenseTracker.entity.Expense;
+import com.sarthak.expenseTracker.entity.Income;
 import com.sarthak.expenseTracker.repository.ExpenseRepository;
 import com.sarthak.expenseTracker.service.ExpenseService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +14,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1")
+@Slf4j
 public class ExpenseController {
     private final ExpenseService expenseService;
 
@@ -51,5 +54,12 @@ public class ExpenseController {
         } else {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to delete expense with ID" + id);
         }
+    }
+
+    @GetMapping("/expense/{year}/{month}")
+    public ResponseEntity<List<Expense>> getExpenseByMonth(@PathVariable int year, @PathVariable String month) {
+        log.info("Got the Get mapping");
+        List<Expense> totalExpenseInMonth = expenseService.fetchExpenseByMonth(year, month);
+        return ResponseEntity.ok(totalExpenseInMonth);
     }
 }
