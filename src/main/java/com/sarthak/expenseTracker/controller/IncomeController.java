@@ -2,6 +2,7 @@ package com.sarthak.expenseTracker.controller;
 
 import com.sarthak.expenseTracker.entity.Income;
 import com.sarthak.expenseTracker.service.IncomeService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +12,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1")
+@Slf4j
 public class IncomeController {
     private final IncomeService incomeService;
 
@@ -32,6 +34,7 @@ public class IncomeController {
 
     @GetMapping("/income/{id}")
     public ResponseEntity<Income> getIncomeById(@PathVariable Long id) {
+        log.info("Program is thinking it is getIncomeById method");
         Optional<Income> incomeOptional = incomeService.fetchIncomeById(id);
         return incomeOptional.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
@@ -50,6 +53,13 @@ public class IncomeController {
         } else {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to delete Income with ID" + id);
         }
+    }
+
+    @GetMapping("/income/{year}/{month}")
+    public ResponseEntity<List<Income>> getIncomeByMonth(@PathVariable int year, @PathVariable String month) {
+        log.info("Got the Get mapping");
+        List<Income> totalIncomeInMonth = incomeService.fetchIncomeByMonth(year, month);
+        return ResponseEntity.ok(totalIncomeInMonth);
     }
 
 }

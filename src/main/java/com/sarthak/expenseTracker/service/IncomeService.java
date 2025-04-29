@@ -2,12 +2,20 @@ package com.sarthak.expenseTracker.service;
 
 import com.sarthak.expenseTracker.entity.Income;
 import com.sarthak.expenseTracker.repository.IncomeRepository;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Service;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.Month;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 
 @Service
+@Slf4j
 public class IncomeService {
     private final IncomeRepository incomeRepository;
 
@@ -63,6 +71,22 @@ public class IncomeService {
             return true;
         } catch (Exception e) {
             throw new RuntimeException("Failed to delete income: "+ e.getMessage());
+        }
+    }
+
+    public List<Income> fetchIncomeByMonth(int year, String month) {
+        try {
+            int monthNum = Month.valueOf(month.toUpperCase(Locale.ENGLISH)).getValue();
+            DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+            String startDate = String.format(year+"-"+monthNum+"-1");
+            String endDate = String.format(year+"-"+(monthNum+1)+"-1");
+            log.info("Dates have been converted from string to Date datatype");
+            List<Income> incomeRecords = incomeRepository.getIncomeRecords_between(startDate, endDate);
+            log.info("Got the required response");
+            return incomeRecords;
+        } catch (Exception e) {
+            log.error("There is a error "+ e);
+            throw new RuntimeException(e);
         }
     }
 }
