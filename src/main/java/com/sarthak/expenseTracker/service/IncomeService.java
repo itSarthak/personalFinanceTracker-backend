@@ -46,6 +46,7 @@ public class IncomeService {
                 Income existingIncome = existingIncomeOptional.get();
                 existingIncome.setType(updatedIncome.getType());
                 existingIncome.setAmount(updatedIncome.getAmount());
+                existingIncome.setDate(updatedIncome.getDate());
                 Income savedEntity = incomeRepository.save(existingIncome);
                 return Optional.of(savedEntity);
             } else {

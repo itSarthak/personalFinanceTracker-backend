@@ -1,12 +1,13 @@
 package com.sarthak.expenseTracker.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
+import java.util.Date;
 
 
-// An entity class is used to mapp to a database table
+// An entity class is used to map to a database table
 @Entity
 @Data
 @Table(name="income")
@@ -20,6 +21,10 @@ public class Income {
     private String type;
 
     @Column(nullable = false)
-    private int amount;
+    private Long amount;
+
+    @Column(nullable = false)
+    @JsonFormat(pattern="yyyy-MM-dd")
+    private Date date;
 
 }
