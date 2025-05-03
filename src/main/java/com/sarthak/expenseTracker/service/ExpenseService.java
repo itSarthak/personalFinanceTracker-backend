@@ -77,11 +77,10 @@ public class ExpenseService {
     public List<Expense> fetchExpenseByMonth(int year, String month) {
         try {
             int monthNum = Month.valueOf(month.toUpperCase(Locale.ENGLISH)).getValue();
-            DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
             String startDate = String.format(year+"-"+monthNum+"-1");
             String endDate = String.format(year+"-"+(monthNum+1)+"-1");
             log.info("Dates have been converted from string to Date datatype");
-            List<Expense> incomeRecords = expenseRepository.getIncomeRecords_between(startDate, endDate);
+            List<Expense> incomeRecords = expenseRepository.getExpenseRecords_between(startDate, endDate);
             log.info("Got the required response");
             return incomeRecords;
         } catch (Exception e) {
@@ -89,5 +88,22 @@ public class ExpenseService {
             throw new RuntimeException(e);
         }
     }
+
+    public Long fetchTotalExpenseByMonth(int year, String month) {
+        try {
+            int monthNum = Month.valueOf(month.toUpperCase(Locale.ENGLISH)).getValue();
+            String startDate = String.format(year+"-"+monthNum+"-1");
+            String endDate = String.format(year+"-"+(monthNum+1)+"-1");
+            log.info("Dates have been converted from string to Date datatype");
+            Long incomeRecords = expenseRepository.getTotalExpenseByMonth(startDate, endDate);
+            log.info("Got the required response");
+            return incomeRecords;
+        } catch (Exception e) {
+            log.error("There is a error "+ e);
+            throw new RuntimeException(e);
+        }
+    }
+
+//    public List<String> getExpenseCategorySummary()
 
 }
