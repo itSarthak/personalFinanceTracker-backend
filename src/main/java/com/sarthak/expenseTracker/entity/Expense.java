@@ -17,7 +17,7 @@ public class Expense {
     private Long id;
 
     @Column(nullable = false)
-    private String type;
+    private String title;
 
     @Column(nullable = false)
     private Long amount;
@@ -25,4 +25,7 @@ public class Expense {
     @Column(nullable = false)
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date date;
+
+    @Column(nullable = false)
+    private String category;
 }
